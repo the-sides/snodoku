@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="">Board</h4>
+    <h4 class="text-red">Board</h4>
   </div>
 </template>
 
@@ -8,5 +8,5 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style>
 </style>

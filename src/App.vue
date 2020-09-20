@@ -1,7 +1,7 @@
 <template>
   <div class="App">
     <header></header>
-    <main>
+    <main class=" h-screen bg-blue">
       <h1>Snoduko</h1>
       <Board></Board>
       <Ui></Ui>
@@ -27,6 +27,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="postcss">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 </style>
