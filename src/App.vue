@@ -4,6 +4,8 @@
       <h1 class="text-center text-4xl leading-7 my-0">Snoduko</h1>
       <p class="text-center mt-2">
         A snowpack application with vue, tailwind, and scss.
+        <br>
+        Built for someone learning a Sudoku solving algorithm by someone learning Vue and new build tools.
       </p>
     </header>
     <main class=" h-screen bg-blue-900 py-16 px-2 md:p-24">

@@ -13,6 +13,9 @@
           :data-x="rowInd"
           :data-y="colInd"
           :key="rowInd"
+          max="9"
+          min="0"
+          maxlength="1"
           v-for="(row, rowInd) in 9"
         />
       </div>
@@ -26,13 +29,10 @@ export default {};
 
 <style lang="scss">
 .board__row {
-  input {
-    outline-offset: -3px;
-  }
   input:not(:last-child) {
     border-right-width: 0px;
   }
-  input:nth-child(3n):not(:last-child){
+  input:nth-child(3n):not(:last-child) {
     border-right-width: 2px;
   }
 }
@@ -47,9 +47,13 @@ export default {};
   }
 }
 input.square {
+  box-sizing: content-box;
   width: 24px;
   height: 24px;
+  padding: 7px;
+  font-size: 42px;
   border: 1px solid theme("colors.black");
+  outline-offset: -3px;
   appearance: none;
   -moz-appearance: textfield;
 }

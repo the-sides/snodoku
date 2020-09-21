@@ -1,8 +1,12 @@
 <template>
-  <div class="hidden">
-    <input type="checkbox" name="auto-solve" id="" />
-    <label for="auto-solve">Auto Solve</label>
-    <button>Solve</button>
+  <div class="my-6 max-w-sm mx-auto flex justify-around">
+    <div class="flex-1">
+      <input type="checkbox" name="auto-solve" id="" />
+      <label class="text-blue-200" for="auto-solve">Auto Solve</label>
+    </div>
+    <div class="flex-1">
+      <button class="block mx-auto border-blue-400 border-2 bg-blue-200 py-2 px-4 rounded">Solve</button>
+    </div>
   </div>
 </template>
 
