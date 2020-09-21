@@ -1,7 +1,7 @@
 <template>
   <div class="App">
     <header class="p-4 shadow-2xl bg-blue-200">
-      <h1 class="text-center text-4xl leading-7 my-0">Snoduko</h1>
+      <h1 class="text-center text-4xl leading-7 my-0">Snodoku</h1>
       <p class="text-center mt-2">
         A snowpack application with vue, tailwind, and scss.
         <br>
