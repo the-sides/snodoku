@@ -1,8 +1,12 @@
 <template>
   <div class="App">
-    <header></header>
-    <main class=" h-screen bg-blue">
-      <h1>Snoduko</h1>
+    <header class="p-4 shadow-2xl bg-blue-200">
+      <h1 class="text-center text-4xl leading-7 my-0">Snoduko</h1>
+      <p class="text-center mt-2">
+        A snowpack application with vue, tailwind, and scss.
+      </p>
+    </header>
+    <main class=" h-screen bg-blue-900 py-16 px-2 md:p-24">
       <Board></Board>
       <Ui></Ui>
     </main>
