@@ -2,21 +2,22 @@
   <div class="board__wrapper max-w-lg mx-auto">
     <div
       class="board__rows"
-      :data-col="colInd"
-      :key="colInd"
-      v-for="(col, colInd) in 9"
+      :data-row="rowInd"
+      :key="rowInd"
+      v-for="(row, rowInd) in 9"
     >
       <div class="board__row w-fit flex justify-center">
         <input
-          type="number"
+          type="text"
           class="square"
-          :data-x="rowInd"
-          :data-y="colInd"
-          :key="rowInd"
+          :data-x="colInd"
+          :data-y="rowInd"
+          :key="colInd"
           max="9"
           min="0"
           maxlength="1"
-          v-for="(row, rowInd) in 9"
+          v-for="(col, colInd) in 9"
+          :value="matrixVal[rowInd*9+colInd]"
         />
       </div>
     </div>
@@ -24,7 +25,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['matrixVal'],
+  data() {
+    // Get values for start board
+    return {
+      matrixVal: [1,2,'',3,'','','','','','',4,'','',5,'',6,'','','','','','','','','','','','','','','','','',7,'','',8,'',9,'','','','','',9,'','',7,'',8,'','',6,'','','','','','','',5,4,'','','','','',3,'',2,'',1]
+    }
+  }
+};
 </script>
 
 <style lang="scss">
