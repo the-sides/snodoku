@@ -5,13 +5,23 @@
       <label class="text-blue-200" for="auto-solve">Auto Solve</label>
     </div>
     <div class="flex-1">
-      <button class="block mx-auto border-blue-400 border-2 bg-blue-200 py-2 px-4 rounded">Solve</button>
+      <button @click="solveBoard" class="block mx-auto border-blue-400 border-2 bg-blue-200 py-2 px-4 rounded">Solve</button>
     </div>
+    {{matrix}}
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    matrix: Array
+  },
+  methods: {
+    solveBoard() {
+      this.$emit('solveBoard');
+    }
+  }
+};
 </script>
 
 <style scoped>

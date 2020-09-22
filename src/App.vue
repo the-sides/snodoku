@@ -4,13 +4,14 @@
       <h1 class="text-center text-4xl leading-7 my-0">Snodoku</h1>
       <p class="text-center mt-2">
         A snowpack application with vue, tailwind, and scss.
-        <br>
-        Built for someone learning a Sudoku solving algorithm by someone learning Vue and new build tools.
+        <br />
+        Built for someone learning a Sudoku solving algorithm by someone
+        learning Vue and new build tools.
       </p>
     </header>
     <main class=" h-screen bg-blue-900 py-16 px-2 md:p-24">
-      <Board></Board>
-      <Ui></Ui>
+      <Board :matrix="matrix"></Board>
+      <Ui :matrix="matrix" @solveBoard="solveBoard"></Ui>
     </main>
     <footer></footer>
   </div>
@@ -19,6 +20,7 @@
 <script>
 import Board from "./components/Board.vue";
 import Ui from "./components/Ui.vue";
+import solver from "./features/api.js";
 
 export default {
   components: {
@@ -27,8 +29,14 @@ export default {
   },
   data() {
     return {
-      message: "Learn Vue"
+      matrix:[]
     };
+  },
+  methods: {
+    solveBoard() {
+
+      this.matrix = solver(this.matrix);
+    }
   }
 };
 </script>

@@ -17,7 +17,8 @@
           min="0"
           maxlength="1"
           v-for="(col, colInd) in 9"
-          :value="matrixVal[rowInd*9+colInd]"
+          :value="matrix[rowInd * 9 + colInd]"
+          @keydown="refreshBoard"
         />
       </div>
     </div>
@@ -25,12 +26,13 @@
 </template>
 
 <script>
+let counter = 0;
+
 export default {
-  props: ['matrixVal'],
-  data() {
-    // Get values for start board
-    return {
-      matrixVal: [1,2,'',3,'','','','','','',4,'','',5,'',6,'','','','','','','','','','','','','','','','','',7,'','',8,'',9,'','','','','',9,'','',7,'',8,'','',6,'','','','','','','',5,4,'','','','','',3,'',2,'',1]
+  props: {matrix: Array},
+  methods: {
+    refreshBoard(ev) {
+      this.matrix[counter++] = 9;
     }
   }
 };
