@@ -20,7 +20,7 @@
 <script>
 import Board from "./components/Board.vue";
 import Ui from "./components/Ui.vue";
-import solver from "./features/api.js";
+import solver from "./features/solver.js";
 
 export default {
   components: {
@@ -29,12 +29,11 @@ export default {
   },
   data() {
     return {
-      matrix:[]
+      matrix: ['', 1, 7,'','','','',8,'','',6,3,8,9,5,7,1,'','','','','','',4,'','',1,6,'',5,'','','','',3,'',2,3,'',6,'',1,5,'',9,'','','','',8,'',2,6,'','',5,'','','','','','',6,7,1,8,5,2,3,'','','',9,'','','','',8,1,'']
     };
   },
   methods: {
     solveBoard() {
-
       this.matrix = solver(this.matrix);
     }
   }
