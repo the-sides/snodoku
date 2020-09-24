@@ -1,7 +1,8 @@
 export default (board) => {
 
   function getSpot(x, y) {
-    return board[x * 9 + y];
+    const val = Number(board[y * 9 + x]);
+    return val > 0 ? val : false;
   }
   function setSpot(x, y, val) {
     if ((x > 8) || (y > 8)) {
@@ -9,6 +10,7 @@ export default (board) => {
     }
     board[y * 9 + x] = val;
   }
+
 
   setSpot(0, 0, 5);
   setSpot(1, 1, 5);
