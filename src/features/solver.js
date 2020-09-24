@@ -57,8 +57,19 @@ export default (board) => {
 
   }
 
-  const checkRow = () => {
+  const checkRow = (y) => {
+    let remaining = arrayUpTo(9);
+    for (let x = 0; x < 9; x++) {
+      remaining = remove(remaining, getSpot(x, y));
+      // console.log(remaining)
+      if (!remaining) {
+        console.log(`Row-${y} @ x-${x}: FAIL X`);
+        return false;
+      }
+    }
 
+    console.log(`Row-${y}: PASS √`);
+    return true;
   }
   const checkCol = () => {
 
@@ -67,14 +78,20 @@ export default (board) => {
   const checkBoard = () => {
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
-        if (!checkBox(i, j)) {
-          console.log('Board invalid')
+        if (0 === ((i + 1) % 3) &&
+          0 === ((j + 1) % 3) &&
+          !checkBox(i, j)) {
+          console.log('Board invalid');
           return false;
         }
       }
     }
+    return true;
   }
 
+  checkRow(0);
+  checkRow(1);
+  checkRow(2);
   checkBoard();
 
   return board;
