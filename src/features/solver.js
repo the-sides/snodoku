@@ -22,6 +22,14 @@ export default (board) => {
 
   // Need to be here for the sake of sharing the scope.
   // Ideally, the board should be a Class with the board member, operating via get/setters
+  const givens = board.map(val => {
+    if (val) {
+      return true;
+    }
+    return false;
+  });
+ console.log(givens)
+
 
   function getSpot(x, y) {
     const val = Number(board[y * 9 + x]);
@@ -71,7 +79,19 @@ export default (board) => {
     console.log(`Row-${y}: PASS √`);
     return true;
   }
-  const checkCol = () => {
+  const checkCol = (x) => {
+    let remaining = arrayUpTo(9);
+    for (let y = 0; y < 9; y++) {
+      remaining = remove(remaining, getSpot(x, y));
+      // console.log(remaining)
+      if (!remaining) {
+        console.log(`Row-${x} @ y-${y}: FAIL X`);
+        return false;
+      }
+    }
+
+    console.log(`Col-${x}: PASS √`);
+    return true;
 
   }
 
