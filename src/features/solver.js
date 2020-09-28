@@ -9,7 +9,6 @@ export default (board) => {
     }
     return false;
   });
-  console.log(givens);
 
 
   function getSpot(x, y) {
@@ -20,9 +19,19 @@ export default (board) => {
     if ((x > 8) || (y > 8)) {
       return false;
     }
+    if (givens[y * 9 + x]) {
+      console.info('caught writing to a given')
+      return false;
+    }
     board[y * 9 + x] = val;
   }
 
+  const isGiven = (x, y) => {
+    if (givens[y * 9 + x]) {
+      return true;
+    }
+    return false;
+  }
   ////////////////////////////////////////
   // Using a point, check it's limitations, the point's row, col and containing box. 
   const checkBox = (x, y) => {
@@ -43,7 +52,6 @@ export default (board) => {
     }
     // console.log(`${xBox}, ${yBox}: PASS √`);
     return true;
-
   }
 
   const checkRow = (y) => {
@@ -52,28 +60,33 @@ export default (board) => {
       remaining = removeVal(remaining, getSpot(x, y));
       // console.log(remaining)
       if (!remaining) {
-        console.log(`Row-${y} @ x-${x}: FAIL X`);
+        // console.log(`Row-${y} @ x-${x}: FAIL X`);
         return false;
       }
     }
-
-    console.log(`Row-${y}: PASS √`);
+    // console.log(`Row-${y}: PASS √`);
     return true;
   }
+
+
   const checkCol = (x) => {
     let remaining = arrayUpTo(9);
     for (let y = 0; y < 9; y++) {
       remaining = removeVal(remaining, getSpot(x, y));
       // console.log(remaining)
       if (!remaining) {
-        console.log(`Row-${x} @ y-${y}: FAIL X`);
+        // console.log(`Row-${x} @ y-${y}: FAIL X`);
         return false;
       }
     }
 
-    console.log(`Col-${x}: PASS √`);
+    // console.log(`Col-${x}: PASS √`);
     return true;
 
+  }
+
+  const checkSpot = (x, y) => {
+    return checkRow(x, y) && checkCol(x, y) && checkBox(x, y);
   }
 
   const checkBoard = () => {
@@ -82,18 +95,68 @@ export default (board) => {
         if (0 === ((i + 1) % 3) &&
           0 === ((j + 1) % 3) &&
           !checkBox(i, j)) {
-          console.log('Board invalid');
+          return false;
+        }
+        if (!getSpot(i, j)) {
           return false;
         }
       }
     }
+    console.log('board is filled')
     return true;
   }
 
-  checkRow(0);
-  checkRow(1);
-  checkRow(2);
-  checkBoard();
+  // Go through each square, in order of the 1D array
+  //   skip givens
+  //   create array of possible values
+  //   check if spot is valid, 
+  //     if so, move to next spot
+  //     else if returned, try next possible value.
+  //        unless if returned with a solved flag
 
+  const recursiveSolve = (x, y) => {
+    // Simple way for stepping through the matrix with callbacks
+    if (9 === x) {
+      y += 1;
+      x = 0;
+    }
+
+    // Move on if spot is given and non-writeable
+    if (isGiven(x, y)) {
+      return recursiveSolve(x + 1, y);
+    }
+
+    // We're cleared to test on this spot.
+    const possibleVals = arrayUpTo(9);
+
+    let currentGuess = possibleVals.pop();
+    while (currentGuess) {
+      console.log('solving...');
+      setSpot(x, y, currentGuess);
+      if (!checkSpot(x, y)) {
+        currentGuess = possibleVals.pop();
+        continue;
+      }
+
+      // We know what we just set is valid and we move forward
+      const result = recursiveSolve(x + 1, y);
+      if (result) {
+        return true;
+      };
+
+      // If this is reach
+      currentGuess = possibleVals.pop();
+    };
+
+    // A particular spot ran out of possibleVals with the previous decisions made
+    //   and we must backtrack those spots. The current spot will be re-executed 
+    //   with new possible values again. 
+    if (checkBoard()) return true;
+    setSpot(x, y, '');
+    return false;
+  };
+
+  recursiveSolve(0, 0);
+  console.log('Root solver finished');
   return board;
 };
