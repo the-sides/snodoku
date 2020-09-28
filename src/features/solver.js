@@ -123,6 +123,7 @@ export default (board) => {
 
     // Move on if spot is given and non-writeable
     if (isGiven(x, y)) {
+      if(8 === x && 8 === y) return checkBoard();
       return recursiveSolve(x + 1, y);
     }
 
@@ -139,19 +140,23 @@ export default (board) => {
       }
 
       // We know what we just set is valid and we move forward
+      //   if we're on the last square and it's valid, we've solved;
+      if(8 === x && y === 8) {
+        return checkBoard();
+      }
+      // Otherwise, recursively keep going, allowing for result to propagate upwards when solved
       const result = recursiveSolve(x + 1, y);
       if (result) {
         return true;
       };
 
-      // If this is reach
+      // A later spot ran out of possibleVals with the previous decisions made
+      //   and we must backtrack those spots. The current spot will be re-executed 
+      //   with new possible values again. 
       currentGuess = possibleVals.pop();
     };
 
-    // A particular spot ran out of possibleVals with the previous decisions made
-    //   and we must backtrack those spots. The current spot will be re-executed 
-    //   with new possible values again. 
-    if (checkBoard()) return true;
+    // Current spot backtracking
     setSpot(x, y, '');
     return false;
   };
