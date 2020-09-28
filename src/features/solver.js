@@ -1,25 +1,6 @@
-function arrayUpTo(n) {
-  const rv = [];
-  let i = 1;
-  while (i - 1 < n) {
-    rv.push(i++);
-  }
-  return rv;
-}
-function remove(arr, val) {
-  // Passive fail on blank spots. 
-  if (!val) {
-    return arr;
-  }
-  const index = arr.indexOf(val);
-  // console.log('remove', val, index)
-  if (index == -1) return false;
-  arr.splice(index, 1);
-  return arr;
-}
+import { arrayUpTo, removeVal } from './utils';
 
 export default (board) => {
-
   // Need to be here for the sake of sharing the scope.
   // Ideally, the board should be a Class with the board member, operating via get/setters
   const givens = board.map(val => {
@@ -28,7 +9,7 @@ export default (board) => {
     }
     return false;
   });
- console.log(givens)
+  console.log(givens);
 
 
   function getSpot(x, y) {
@@ -52,7 +33,7 @@ export default (board) => {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // console.log('inspecting x:',i + xBox * 3, ' y:', j + yBox * 3)
-        remaining = remove(remaining, getSpot(i + xBox * 3, j + yBox * 3));
+        remaining = removeVal(remaining, getSpot(i + xBox * 3, j + yBox * 3));
         // console.log(remaining)
         if (!remaining) {
           // console.log(`${xBox}, ${yBox}: FAIL X`);
@@ -68,7 +49,7 @@ export default (board) => {
   const checkRow = (y) => {
     let remaining = arrayUpTo(9);
     for (let x = 0; x < 9; x++) {
-      remaining = remove(remaining, getSpot(x, y));
+      remaining = removeVal(remaining, getSpot(x, y));
       // console.log(remaining)
       if (!remaining) {
         console.log(`Row-${y} @ x-${x}: FAIL X`);
@@ -82,7 +63,7 @@ export default (board) => {
   const checkCol = (x) => {
     let remaining = arrayUpTo(9);
     for (let y = 0; y < 9; y++) {
-      remaining = remove(remaining, getSpot(x, y));
+      remaining = removeVal(remaining, getSpot(x, y));
       // console.log(remaining)
       if (!remaining) {
         console.log(`Row-${x} @ y-${y}: FAIL X`);
