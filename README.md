@@ -1,5 +1,9 @@
 # Snodoku - A Sudoku solver built with Vue and Snowpack.
 
+
+![Screenshot](screenshot.png)
+This is a snowpack application with vue, tailwind, and scss.
+I built this app to learn Vue and new build tools, and left a spot for a solving algorithm to be done by a mentee. I did that part as well to provide a solution and prove that it could be done. 
 > ✨ Bootstrapped with Create Snowpack App (CSA) - Vue edition.
 
 ## Available Scripts
