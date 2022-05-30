@@ -1,10 +1,6 @@
 <template>
   <div class="">
     <div class="my-6 max-w-sm mx-auto flex justify-around">
-      <div class="flex-1 flex justify-center">
-        <input type="checkbox" name="auto-solve" id="" />
-        <label class="text-blue-200 leading-3 my-auto ml-4 text-xl" for="auto-solve">Auto Solve</label>
-      </div>
       <div class="flex-1">
         <button
           @click="solveBoard"
